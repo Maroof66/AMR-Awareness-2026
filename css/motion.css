@@ -1,0 +1,76 @@
+/* Stage choreography: the same character remains present as the camera moves. */
+#room { opacity:1; transition:opacity 1.1s ease; }
+#character { transform-box:fill-box; transform-origin:50% 90%; animation:body-breathe 4.8s ease-in-out infinite; }
+#head { transform-box:fill-box; transform-origin:50% 75%; animation:head-life 6s ease-in-out infinite; }
+#hair-front { transform-box:fill-box; transform-origin:50% 10%; animation:hair-life 6s ease-in-out infinite; }
+#blink { transform-origin:center; animation:eye-blink 5.2s infinite; }
+#right-arm { transform-box:fill-box; transform-origin:18% 18%; transition:transform 1.2s cubic-bezier(.2,.8,.2,1); }
+#left-arm { transform-box:fill-box; transform-origin:82% 20%; transition:transform 1.2s cubic-bezier(.2,.8,.2,1); }
+#pill { transform-box:fill-box; transform-origin:center; animation:pill-idle 3.5s ease-in-out infinite; transition:opacity .5s, transform 1s; }
+#packet { transition:opacity .6s, transform .8s; }
+#time-card { transition:opacity .6s, transform .8s; }
+#camera-frame { transform-box:fill-box; transform-origin:50% 54%; transition:transform 2.2s cubic-bezier(.65,0,.2,1); }
+#micro-world { opacity:0; transition:opacity 1.2s ease .5s; }
+#bacteria-group { opacity:0; transition:opacity 1s ease; }
+#susceptible { transform-box:fill-box; transform-origin:center; }
+#resistant { transform-box:fill-box; transform-origin:center; }
+#antibiotic-dots { opacity:0; transition:opacity .6s; }
+#selection-overlay { opacity:0; transition:opacity .7s; }
+#clinic { opacity:0; transition:opacity 1s; }
+#resistant-result { opacity:0; transition:opacity 1s; }
+
+/* Chapter states */
+#stage[data-phase="habit"] #right-arm { transform:rotate(-8deg) translate(-5px,-3px); }
+#stage[data-phase="habit"] #pill { transform:translate(8px,-7px) rotate(18deg); }
+#stage[data-phase="repeat"] #right-arm { transform:rotate(7deg) translate(2px,5px); }
+#stage[data-phase="repeat"] #packet { opacity:1; transform:translateY(0); }
+#stage[data-phase="repeat"] #time-card { opacity:1; transform:translateY(0); }
+#stage[data-phase="zoom"] #camera-frame { transform:scale(2.6) translate(0,10%); }
+#stage[data-phase="zoom"] #room { opacity:0; }
+#stage[data-phase="zoom"] #micro-world { opacity:1; }
+#stage[data-phase="zoom"] #bacteria-group { opacity:1; }
+#stage[data-phase="exposure"] #camera-frame { transform:scale(2.65) translate(0,10%); }
+#stage[data-phase="exposure"] #room { opacity:0; }
+#stage[data-phase="exposure"] #micro-world,
+#stage[data-phase="exposure"] #bacteria-group { opacity:1; }
+#stage[data-phase="exposure"] #antibiotic-dots { opacity:1; }
+#stage[data-phase="selection"] #camera-frame { transform:scale(2.65) translate(0,10%); }
+#stage[data-phase="selection"] #room { opacity:0; }
+#stage[data-phase="selection"] #micro-world,
+#stage[data-phase="selection"] #bacteria-group,
+#stage[data-phase="selection"] #selection-overlay { opacity:1; }
+#stage[data-phase="resistant"] #camera-frame { transform:scale(2.65) translate(0,10%); }
+#stage[data-phase="resistant"] #room { opacity:0; }
+#stage[data-phase="resistant"] #micro-world,
+#stage[data-phase="resistant"] #bacteria-group,
+#stage[data-phase="resistant"] #selection-overlay { opacity:1; }
+#stage[data-phase="clinic"] #camera-frame { transform:scale(1) translate(0,0); }
+#stage[data-phase="clinic"] #room { opacity:1; }
+#stage[data-phase="clinic"] #micro-world,
+#stage[data-phase="clinic"] #bacteria-group { opacity:0; }
+#stage[data-phase="clinic"] #clinic { opacity:1; }
+#stage[data-phase="clinic"] #character { animation:none; }
+#stage[data-phase="clinic"] #resistant-result { opacity:1; }
+
+.bacterium { animation:bacteria-drift 5s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+.bacterium:nth-child(2n) { animation-delay:-2s; animation-duration:6s; }
+.antibiotic { animation:antibiotic-drift 3s ease-in-out infinite; }
+#resistant .target-mark { transition:transform 1s ease; }
+#stage[data-phase="resistant"] #resistant { animation:resistant-pulse 2.2s ease-in-out infinite; }
+#stage[data-phase="selection"] #susceptible { animation:fade-out 1.3s ease forwards; }
+#stage[data-phase="selection"] #resistant { animation:survivor-pop 1.1s ease both; }
+
+@keyframes body-breathe { 0%,100%{transform:translateY(0) scaleY(1)} 50%{transform:translateY(-3px) scaleY(1.006)} }
+@keyframes head-life { 0%,100%{transform:rotate(0)} 50%{transform:rotate(1deg)} }
+@keyframes hair-life { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-.5deg)} }
+@keyframes eye-blink { 0%,43%,46%,100%{transform:scaleY(1)} 44.5%{transform:scaleY(.07)} }
+@keyframes pill-idle { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-5px) rotate(3deg)} }
+@keyframes bacteria-drift { 0%,100%{transform:translate(0,0) rotate(0)} 50%{transform:translate(7px,-9px) rotate(5deg)} }
+@keyframes antibiotic-drift { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-10px) rotate(12deg)} }
+@keyframes fade-out { to{opacity:.08;transform:scale(.72)} }
+@keyframes survivor-pop { 0%{transform:scale(.8)} 70%{transform:scale(1.12)} 100%{transform:scale(1)} }
+@keyframes resistant-pulse { 0%,100%{filter:drop-shadow(0 0 0 #f4a24b00)} 50%{filter:drop-shadow(0 0 13px #f4a24b)} }
+@keyframes caption-in { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important; }
+}

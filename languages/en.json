@@ -1,0 +1,48 @@
+{
+  "brand": "AWARENESS / ANTIBIOTIC RESISTANCE",
+  "intro": {
+    "title": "A small habit. A bigger consequence.",
+    "body": "When we feel unwell, it can be tempting to reach for antibiotics without checking whether we need them.",
+    "button": "Meet our character"
+  },
+  "habit": {
+    "title": "A sore throat. A busy day.",
+    "body": "She has some leftover antibiotics at home. Without consulting a healthcare professional, she decides to take one.",
+    "button": "A little later"
+  },
+  "repeat": {
+    "title": "Then it happens again.",
+    "body": "Another minor illness. Another self-directed course from the medicine drawer. Antibiotics are being used when they may not be needed.",
+    "button": "Look closer"
+  },
+  "zoom": {
+    "title": "A whole world, too small to see.",
+    "body": "The camera follows the medicine into the body. Here, antibiotics meet bacteria — but not every bacterium is exactly alike.",
+    "button": "Meet the bacteria"
+  },
+  "exposure": {
+    "title": "Most are susceptible. A few are different.",
+    "body": "In this bacterial population, most cells have the usual target. A small number already carry a genetic change that alters the antibiotic's target.",
+    "button": "What happens next?"
+  },
+  "selection": {
+    "title": "The susceptible bacteria are stopped.",
+    "body": "The antibiotic affects bacteria it can bind to. Bacteria with the altered target are less affected and survive.",
+    "button": "Watch the survivors"
+  },
+  "resistant": {
+    "title": "The survivors multiply.",
+    "body": "Those resistant bacteria reproduce. Over time, they can become a much larger share of the population. The antibiotic has selected for resistance.",
+    "button": "See the consequence"
+  },
+  "clinic": {
+    "title": "Now the antibiotic is genuinely needed.",
+    "body": "She develops a bacterial infection and receives medical care. But if the bacteria causing it are resistant to that antibiotic, the medicine may no longer work.",
+    "button": "The takeaway"
+  },
+  "takeaway": {
+    "title": "Use them only when they're needed.",
+    "body": "Never self-medicate, share antibiotics or use leftovers. Follow a qualified professional's advice. Antibiotics do not treat viral illnesses like the common cold.",
+    "button": "Replay the story"
+  }
+}
