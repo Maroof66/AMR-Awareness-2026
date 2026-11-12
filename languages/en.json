@@ -1,0 +1,20 @@
+{
+  "brand": "ANTIBIOTIC RESISTANCE",
+  "eyebrow": "A SHORT INTERACTIVE STORY",
+  "hint": "Take a moment. Watch what happens.",
+  "intro": {
+    "title": "A small habit. A bigger consequence.",
+    "description": "We often take antibiotics without thinking twice. But what happens when we use them when they aren't needed?",
+    "button": "Start the story"
+  },
+  "scene1": {
+    "title": "Feeling a little unwell?",
+    "description": "A common cold, a sore throat or a minor problem. Sometimes we reach for leftover antibiotics without consulting a healthcare professional.",
+    "button": "Let's look inside"
+  },
+  "scene2": {
+    "title": "A microscopic world awaits.",
+    "description": "Let's follow the journey of an antibiotic and discover what can happen to bacteria when they are exposed to it.",
+    "button": "Continue"
+  }
+}
