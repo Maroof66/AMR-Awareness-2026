@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F4F8F7">
+<title>Antibiotic Resistance | An Interactive Story</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, "Segoe UI", sans-serif;
+  background: #F4F8F7;
+  color: #183B3A;
+  overflow: hidden;
+}
+
+#experience {
+  height: 100svh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 6%;
+  position: relative;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #66817C;
+}
+
+.progress {
+  height: 4px;
+  background: #DCE9E5;
+  border-radius: 20px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #168779;
+  border-radius: 20px;
+  transition: width 0.6s ease;
+}
+
+.scene {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 0;
+  padding: 18px 0;
+  animation: appear 0.7s ease;
+}
+
+.illustration {
+  width: min(100%, 620px);
+  max-height: 48vh;
+  margin-bottom: 22px;
+  animation: float 4s ease-in-out infinite;
+}
+
+h1 {
+  font-size: clamp(30px, 6vw, 54px);
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+  max-width: 650px;
+  margin-bottom: 14px;
+}
+
+.description {
+  max-width: 520px;
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 1.7;
+  color: #66817C;
+}
+
+.bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0 5px;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 25px;
+  background: #147F73;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #10665D;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-height: 650px) {
+  .illustration { max-height: 38vh; }
+  #experience { padding-top: 14px; }
+}
+
+@media (max-width: 480px) {
+  #experience { padding: 18px 20px; }
+  .illustration { max-height: 42vh; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="experience">
+
+  <div class="top">
+    <span>ANTIBIOTIC RESISTANCE</span>
+    <span id="counter">INTRO</span>
+  </div>
+
+  <div class="progress">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <main class="scene" id="scene">
+
+    <svg class="illustration" viewBox="0 0 500 320"
+         xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Background -->
+      <circle cx="250" cy="155" r="132" fill="#E1F0EB"/>
+      <circle cx="250" cy="155" r="105" fill="#D3E9E1"/>
+
+      <!-- Decorative elements -->
+      <circle cx="92" cy="91" r="7" fill="#A5D5C8"/>
+      <circle cx="395" cy="91" r="10" fill="#A5D5C8"/>
+      <circle cx="405" cy="224" r="6" fill="#A5D5C8"/>
+
+      <!-- Person's body -->
+      <path d="M175 294 Q175 220 195 205
+               Q250 180 305 205
+               Q325 225 325 294Z"
+            fill="#397D75"/>
+
+      <!-- Neck -->
+      <path d="M230 190 L230 218 Q250 235 270 218
+               L270 190Z"
+            fill="#DFAE91"/>
+
+      <!-- Head -->
+      <ellipse cx="250" cy="133" rx="63" ry="73"
+               fill="#E9BEA0"/>
+
+      <!-- Hair -->
+      <path d="M187 135 Q174 62 240 54
+               Q315 48 313 120
+               Q300 97 285 91
+               Q260 111 206 98
+               L194 151Z"
+            fill="#344B4A"/>
+
+      <!-- Eyes -->
+      <ellipse cx="226" cy="139" rx="4" ry="5"
+               fill="#304947"/>
+      <ellipse cx="274" cy="139" rx="4" ry="5"
+               fill="#304947"/>
+
+      <!-- Expression -->
+      <path d="M237 166 Q250 171 263 166"
+            stroke="#A56E60" stroke-width="3"
+            fill="none" stroke-linecap="round"/>
+
+      <!-- Arm -->
+      <path d="M296 225 Q335 206 344 171
+               Q349 155 337 150"
+            stroke="#E9BEA0" stroke-width="23"
+            fill="none" stroke-linecap="round"/>
+
+      <!-- Hand -->
+      <circle cx="335" cy="148" r="12" fill="#E9BEA0"/>
+
+      <!-- Medicine tablet -->
+      <g transform="translate(340 115) rotate(-35)">
+        <rect width="24" height="43" rx="12" fill="#FFFFFF"/>
+        <path d="M0 21.5 H24" stroke="#168779" stroke-width="2"/>
+        <path d="M0 12 A12 12 0 0 1 24 12 V21.5 H0Z"
+              fill="#168779"/>
+      </g>
+
+      <!-- Glass -->
+      <path d="M365 205 L405 205 L400 255
+               Q385 265 370 255Z"
+            fill="#FFFFFF" opacity=".8"
+            stroke="#82B7AB" stroke-width="3"/>
+      <path d="M369 230 L402 230 L400 253
+               Q385 260 372 253Z"
+            fill="#8ACEC0" opacity=".7"/>
+
+      <!-- Floating pill decoration -->
+      <g transform="translate(120 180) rotate(25)">
+        <rect width="17" height="30" rx="9" fill="#FFFFFF"/>
+        <path d="M0 15 H17" stroke="#168779" stroke-width="2"/>
+      </g>
+
+    </svg>
+
+    <h1 id="title">A small habit.<br>A bigger consequence.</h1>
+
+    <p class="description" id="description">
+      We often take antibiotics without thinking twice.
+      But what happens when we use them when they aren't needed?
+    </p>
+
+  </main>
+
+  <div class="bottom">
+    <button id="nextButton" onclick="nextScene()">
+      Start the story →
+    </button>
+  </div>
+
+</div>
+
+<script>
+
+const scenes = [
+  {
+    title: "A small habit.<br>A bigger consequence.",
+    description:
+      "We often take antibiotics without thinking twice. But what happens when we use them when they aren't needed?",
+    button: "Start the story →",
+    counter: "INTRO"
+  },
+  {
+    title: "Feeling a little unwell?",
+    description:
+      "A common cold, a sore throat or a minor problem. Sometimes we reach for leftover antibiotics without consulting a healthcare professional.",
+    button: "Let's look inside →",
+    counter: "01 / 06"
+  },
+  {
+    title: "A microscopic world awaits.",
+    description:
+      "Let's follow the journey of an antibiotic and discover what can happen to bacteria when they are exposed to it.",
+    button: "Continue →",
+    counter: "02 / 06"
+  }
+];
+
+let currentScene = 0;
+
+function nextScene() {
+
+  if (currentScene >= scenes.length - 1) {
+    return;
+  }
+
+  currentScene++;
+
+  const scene = scenes[currentScene];
+
+  const container = document.getElementById("scene");
+
+  container.style.animation = "none";
+  void container.offsetWidth;
+  container.style.animation = "appear 0.7s ease";
+
+  document.getElementById("title").innerHTML = scene.title;
+  document.getElementById("description").textContent =
+    scene.description;
+
+  document.getElementById("nextButton").textContent =
+    scene.button;
+
+  document.getElementById("counter").textContent =
+    scene.counter;
+
+  document.getElementById("progress").style.width =
+    (currentScene / (scenes.length - 1) * 100) + "%";
+}
+
+</script>
+
+</body>
+</html>
