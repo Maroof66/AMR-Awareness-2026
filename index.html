@@ -8,6 +8,15 @@
 <title>Antibiotic Resistance | An Interactive Story</title>
 
 <style>
+:root {
+  --background: #F4F8F7;
+  --ink: #183B3A;
+  --muted: #66817C;
+  --green: #168779;
+  --green-dark: #10665D;
+  --soft-green: #DCEFE8;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,45 +25,89 @@
 
 body {
   font-family: Inter, "Segoe UI", sans-serif;
-  background: #F4F8F7;
-  color: #183B3A;
+  background: var(--background);
+  color: var(--ink);
   overflow: hidden;
 }
 
 #experience {
-  height: 100svh;
+  min-height: 100svh;
   width: 100%;
   display: flex;
   flex-direction: column;
   padding: 22px 6%;
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
 }
+
+/* Soft background atmosphere */
+
+.ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ambient::before,
+.ambient::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: .55;
+}
+
+.ambient::before {
+  width: 300px;
+  height: 300px;
+  background: #E3F2EC;
+  top: -150px;
+  right: -80px;
+}
+
+.ambient::after {
+  width: 260px;
+  height: 260px;
+  background: #E8F1ED;
+  bottom: -150px;
+  left: -90px;
+}
+
+/* Header */
 
 .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  gap: 12px;
+  font-size: 11px;
   letter-spacing: 2px;
-  font-weight: 700;
-  color: #66817C;
+  font-weight: 800;
+  color: var(--muted);
+  flex-shrink: 0;
 }
 
 .progress {
   height: 4px;
   background: #DCE9E5;
   border-radius: 20px;
-  margin-top: 18px;
+  margin-top: 17px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: #168779;
+  background: var(--green);
   border-radius: 20px;
-  transition: width 0.6s ease;
+  transition: width .65s cubic-bezier(.2,.8,.2,1);
 }
+
+/* Main scene */
 
 .scene {
   flex: 1;
@@ -64,78 +117,283 @@ body {
   align-items: center;
   text-align: center;
   min-height: 0;
-  padding: 18px 0;
-  animation: appear 0.7s ease;
+  padding: 14px 0;
+  animation: appear .7s ease both;
 }
 
 .illustration {
-  width: min(100%, 620px);
-  max-height: 48vh;
-  margin-bottom: 22px;
-  animation: float 4s ease-in-out infinite;
+  width: min(100%, 650px);
+  max-height: 51vh;
+  margin-bottom: 18px;
+  overflow: visible;
 }
 
+/* Character idle animations */
+
+.character-body {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.character-head {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: headMove 5s ease-in-out infinite;
+}
+
+.character-arm {
+  transform-box: fill-box;
+  transform-origin: 15% 15%;
+  animation: armMove 4s ease-in-out infinite;
+}
+
+.eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5s infinite;
+}
+
+.eye.right {
+  animation-delay: .08s;
+}
+
+.floating-pill {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pillFloat 3.5s ease-in-out infinite;
+}
+
+.float-one {
+  animation: driftOne 6s ease-in-out infinite;
+}
+
+.float-two {
+  animation: driftTwo 7s ease-in-out infinite;
+}
+
+.float-three {
+  animation: driftOne 5s ease-in-out infinite reverse;
+}
+
+.sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: shadowPulse 4s ease-in-out infinite;
+}
+
+/* Typography */
+
 h1 {
-  font-size: clamp(30px, 6vw, 54px);
+  font-size: clamp(30px, 5.5vw, 54px);
   line-height: 1.12;
-  letter-spacing: -1.5px;
-  max-width: 650px;
+  letter-spacing: -1.7px;
+  max-width: 700px;
   margin-bottom: 14px;
+  font-weight: 800;
 }
 
 .description {
-  max-width: 520px;
-  font-size: clamp(15px, 2.5vw, 18px);
+  max-width: 530px;
+  font-size: clamp(15px, 2.2vw, 18px);
   line-height: 1.7;
-  color: #66817C;
+  color: var(--muted);
+  padding: 0 8px;
 }
+
+/* Bottom controls */
 
 .bottom {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 10px 0 5px;
+  flex-shrink: 0;
 }
 
 button {
   border: none;
   border-radius: 30px;
-  padding: 13px 25px;
-  background: #147F73;
+  padding: 14px 25px;
+  background: var(--green);
   color: white;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: background .2s ease, transform .2s ease,
+              box-shadow .2s ease;
+  box-shadow: 0 6px 18px rgba(22,135,121,.16);
 }
 
 button:hover {
-  background: #10665D;
+  background: var(--green-dark);
   transform: translateY(-2px);
+  box-shadow: 0 9px 22px rgba(22,135,121,.22);
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: scale(.97);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-9px); }
+button:focus-visible {
+  outline: 3px solid #91CFC0;
+  outline-offset: 4px;
+}
+
+/* Animation definitions */
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-3px) scaleY(1.012); }
+}
+
+@keyframes headMove {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.2deg); }
+}
+
+@keyframes armMove {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-2deg); }
+}
+
+@keyframes blink {
+  0%, 43%, 47%, 100% { transform: scaleY(1); }
+  45% { transform: scaleY(.08); }
+}
+
+@keyframes pillFloat {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes driftOne {
+  0%, 100% { transform: translate(0,0); }
+  50% { transform: translate(5px,-12px); }
+}
+
+@keyframes driftTwo {
+  0%, 100% { transform: translate(0,0); }
+  50% { transform: translate(-7px,9px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: .35; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes shadowPulse {
+  0%, 100% { transform: scaleX(1); opacity: .24; }
+  50% { transform: scaleX(.88); opacity: .15; }
 }
 
 @keyframes appear {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@media (max-height: 650px) {
-  .illustration { max-height: 38vh; }
-  #experience { padding-top: 14px; }
+/* Tablet and mobile */
+
+@media (max-width: 700px) {
+  #experience {
+    padding: 18px 22px;
+  }
+
+  .illustration {
+    max-height: 45vh;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    letter-spacing: -1px;
+  }
+
+  .description {
+    line-height: 1.6;
+  }
 }
 
-@media (max-width: 480px) {
-  #experience { padding: 18px 20px; }
-  .illustration { max-height: 42vh; }
+@media (max-width: 380px) {
+  #experience {
+    padding: 15px 17px;
+  }
+
+  .top {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+
+  .illustration {
+    max-height: 39vh;
+  }
+
+  h1 {
+    font-size: 29px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px 20px;
+  }
+}
+
+/* Short landscape screens */
+
+@media (max-height: 620px) {
+  #experience {
+    padding-top: 12px;
+    padding-bottom: 10px;
+  }
+
+  .progress {
+    margin-top: 10px;
+  }
+
+  .illustration {
+    max-height: 39vh;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: clamp(25px, 4vw, 38px);
+    margin-bottom: 8px;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .bottom {
+    padding-top: 5px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
@@ -144,171 +402,407 @@ button:active {
 
 <div id="experience">
 
-  <div class="top">
-    <span>ANTIBIOTIC RESISTANCE</span>
-    <span id="counter">INTRO</span>
-  </div>
+  <div class="ambient"></div>
 
-  <div class="progress">
+  <header class="top">
+    <span data-i18n="brand">ANTIBIOTIC RESISTANCE</span>
+    <span id="counter">INTRO</span>
+  </header>
+
+  <div
+    class="progress"
+    role="progressbar"
+    aria-label="Story progress"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+    id="progressTrack"
+  >
     <div class="progress-fill" id="progress"></div>
   </div>
 
   <main class="scene" id="scene">
 
-    <svg class="illustration" viewBox="0 0 500 320"
-         xmlns="http://www.w3.org/2000/svg">
+    <!-- Main opening illustration -->
+    <svg class="illustration"
+         viewBox="0 0 520 360"
+         xmlns="http://www.w3.org/2000/svg"
+         role="img"
+         aria-label="A person holding a medicine tablet beside a glass of water">
 
-      <!-- Background -->
-      <circle cx="250" cy="155" r="132" fill="#E1F0EB"/>
-      <circle cx="250" cy="155" r="105" fill="#D3E9E1"/>
+      <defs>
+        <linearGradient id="backgroundGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#E8F5EF"/>
+          <stop offset="100%" stop-color="#D4EAE1"/>
+        </linearGradient>
 
-      <!-- Decorative elements -->
-      <circle cx="92" cy="91" r="7" fill="#A5D5C8"/>
-      <circle cx="395" cy="91" r="10" fill="#A5D5C8"/>
-      <circle cx="405" cy="224" r="6" fill="#A5D5C8"/>
+        <linearGradient id="shirtGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#45988A"/>
+          <stop offset="100%" stop-color="#236E66"/>
+        </linearGradient>
 
-      <!-- Person's body -->
-      <path d="M175 294 Q175 220 195 205
-               Q250 180 305 205
-               Q325 225 325 294Z"
-            fill="#397D75"/>
+        <linearGradient id="skinGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#F2C9AC"/>
+          <stop offset="100%" stop-color="#DDA98C"/>
+        </linearGradient>
 
-      <!-- Neck -->
-      <path d="M230 190 L230 218 Q250 235 270 218
-               L270 190Z"
-            fill="#DFAE91"/>
+        <linearGradient id="glassGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#A9DCD0" stop-opacity=".5"/>
+        </linearGradient>
 
-      <!-- Head -->
-      <ellipse cx="250" cy="133" rx="63" ry="73"
-               fill="#E9BEA0"/>
+        <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5"/>
+        </filter>
+      </defs>
 
-      <!-- Hair -->
-      <path d="M187 135 Q174 62 240 54
-               Q315 48 313 120
-               Q300 97 285 91
-               Q260 111 206 98
-               L194 151Z"
-            fill="#344B4A"/>
+      <!-- Background circles -->
+      <circle cx="260" cy="170" r="145" fill="url(#backgroundGradient)"/>
+      <circle cx="260" cy="170" r="116" fill="#D9EEE5" opacity=".75"/>
 
-      <!-- Eyes -->
-      <ellipse cx="226" cy="139" rx="4" ry="5"
-               fill="#304947"/>
-      <ellipse cx="274" cy="139" rx="4" ry="5"
-               fill="#304947"/>
+      <!-- Floating decorative elements -->
+      <g class="float-one">
+        <circle cx="100" cy="105" r="8" fill="#A3D7C8"/>
+        <circle cx="100" cy="105" r="3" fill="#FFFFFF"/>
+      </g>
 
-      <!-- Expression -->
-      <path d="M237 166 Q250 171 263 166"
-            stroke="#A56E60" stroke-width="3"
-            fill="none" stroke-linecap="round"/>
+      <g class="float-two">
+        <circle cx="411" cy="100" r="11" fill="#B5DED2"/>
+        <circle cx="411" cy="100" r="4" fill="#FFFFFF"/>
+      </g>
 
-      <!-- Arm -->
-      <path d="M296 225 Q335 206 344 171
-               Q349 155 337 150"
-            stroke="#E9BEA0" stroke-width="23"
-            fill="none" stroke-linecap="round"/>
+      <g class="float-three">
+        <circle cx="420" cy="240" r="6" fill="#A5D5C8"/>
+      </g>
 
-      <!-- Hand -->
-      <circle cx="335" cy="148" r="12" fill="#E9BEA0"/>
+      <g class="sparkle" fill="#FFFFFF">
+        <path d="M145 190 L149 201 L160 205 L149 209 L145 220 L141 209 L130 205 L141 201Z"/>
+        <path d="M378 153 L381 161 L389 164 L381 167 L378 175 L375 167 L367 164 L375 161Z"/>
+      </g>
 
-      <!-- Medicine tablet -->
-      <g transform="translate(340 115) rotate(-35)">
-        <rect width="24" height="43" rx="12" fill="#FFFFFF"/>
-        <path d="M0 21.5 H24" stroke="#168779" stroke-width="2"/>
-        <path d="M0 12 A12 12 0 0 1 24 12 V21.5 H0Z"
+      <!-- Ground shadow -->
+      <ellipse class="shadow" cx="260" cy="320" rx="112" ry="13"
+               fill="#739F91" opacity=".24" filter="url(#softShadow)"/>
+
+      <!-- Character body -->
+      <g class="character-body">
+
+        <!-- Neck -->
+        <path d="M226 191 L226 223
+                 Q260 245 294 223
+                 L294 190Z"
+              fill="url(#skinGradient)"/>
+
+        <!-- Shirt -->
+        <path d="M177 304
+                 Q177 246 204 222
+                 Q224 207 240 210
+                 L260 228
+                 L280 210
+                 Q298 207 317 222
+                 Q345 246 345 304Z"
+              fill="url(#shirtGradient)"/>
+
+        <!-- Shirt collar -->
+        <path d="M228 213 L260 239 L292 213
+                 L281 205 L260 222 L239 205Z"
+              fill="#D5EAE2"/>
+
+        <!-- Left arm -->
+        <path d="M202 231
+                 Q181 251 181 284"
+              stroke="#E8B99B"
+              stroke-width="25"
+              stroke-linecap="round"
+              fill="none"/>
+
+        <!-- Right arm -->
+        <path d="M313 229
+                 Q338 211 345 178
+                 Q348 163 337 151"
+              stroke="url(#skinGradient)"
+              stroke-width="25"
+              stroke-linecap="round"
+              fill="none"/>
+
+        <!-- Hand -->
+        <path d="M326 151
+                 Q331 137 341 138
+                 Q352 140 350 153
+                 Q348 164 338 164
+                 Q328 162 326 151Z"
+              fill="#E9BC9E"/>
+
+      </g>
+
+      <!-- Character head -->
+      <g class="character-head">
+
+        <!-- Ears -->
+        <ellipse cx="193" cy="145" rx="12" ry="18" fill="#DDA98C"/>
+        <ellipse cx="327" cy="145" rx="12" ry="18" fill="#DDA98C"/>
+
+        <!-- Face -->
+        <ellipse cx="260" cy="139" rx="69" ry="79"
+                 fill="url(#skinGradient)"/>
+
+        <!-- Hair -->
+        <path d="M192 139
+                 Q178 68 239 53
+                 Q306 40 326 96
+                 Q335 115 327 144
+                 Q316 119 298 106
+                 Q274 116 250 110
+                 Q222 107 204 96
+                 Q196 114 192 139Z"
+              fill="#344B4A"/>
+
+        <!-- Side hair -->
+        <path d="M194 117 Q185 151 201 175
+                 L207 145Z"
+              fill="#344B4A"/>
+
+        <path d="M325 116 Q335 151 319 175
+                 L315 145Z"
+              fill="#344B4A"/>
+
+        <!-- Eyebrows -->
+        <path d="M220 125 Q234 117 246 124"
+              stroke="#79584D" stroke-width="3"
+              fill="none" stroke-linecap="round"/>
+
+        <path d="M274 124 Q288 117 301 125"
+              stroke="#79584D" stroke-width="3"
+              fill="none" stroke-linecap="round"/>
+
+        <!-- Eyes -->
+        <g class="eye">
+          <ellipse cx="234" cy="143" rx="5" ry="6" fill="#304947"/>
+          <circle cx="236" cy="141" r="1.5" fill="#FFFFFF"/>
+        </g>
+
+        <g class="eye right">
+          <ellipse cx="286" cy="143" rx="5" ry="6" fill="#304947"/>
+          <circle cx="288" cy="141" r="1.5" fill="#FFFFFF"/>
+        </g>
+
+        <!-- Nose -->
+        <path d="M257 145 Q251 160 259 162"
+              stroke="#C58D77"
+              stroke-width="2.5"
+              fill="none"
+              stroke-linecap="round"/>
+
+        <!-- Friendly smile -->
+        <path d="M242 174 Q260 190 279 174"
+              stroke="#A66E61"
+              stroke-width="3"
+              fill="none"
+              stroke-linecap="round"/>
+
+        <!-- Cheeks -->
+        <ellipse cx="220" cy="164" rx="10" ry="5" fill="#E89D91" opacity=".3"/>
+        <ellipse cx="300" cy="164" rx="10" ry="5" fill="#E89D91" opacity=".3"/>
+
+      </g>
+
+      <!-- Hand-held tablet -->
+      <g class="floating-pill" transform="translate(335 103) rotate(-25)">
+        <rect x="-10" y="-22" width="22" height="44"
+              rx="11" fill="#FFFFFF"
+              stroke="#D4E5DF" stroke-width="1.5"/>
+        <path d="M-10 0 H12"
+              stroke="#168779" stroke-width="2.5"/>
+        <path d="M-10 -11
+                 A11 11 0 0 1 12 -11
+                 V0 H-10Z"
               fill="#168779"/>
       </g>
 
-      <!-- Glass -->
-      <path d="M365 205 L405 205 L400 255
-               Q385 265 370 255Z"
-            fill="#FFFFFF" opacity=".8"
-            stroke="#82B7AB" stroke-width="3"/>
-      <path d="M369 230 L402 230 L400 253
-               Q385 260 372 253Z"
-            fill="#8ACEC0" opacity=".7"/>
+      <!-- Glass of water -->
+      <g transform="translate(370 210)">
+        <ellipse cx="0" cy="53" rx="24" ry="5" fill="#9BCFC2" opacity=".25"/>
 
-      <!-- Floating pill decoration -->
-      <g transform="translate(120 180) rotate(25)">
-        <rect width="17" height="30" rx="9" fill="#FFFFFF"/>
-        <path d="M0 15 H17" stroke="#168779" stroke-width="2"/>
+        <path d="M-23 -10 L23 -10 L19 48
+                 Q0 59 -19 48Z"
+              fill="url(#glassGradient)"
+              stroke="#82B7AB" stroke-width="2.5"/>
+
+        <path d="M-20 17 L21 17 L19 46
+                 Q0 55 -18 46Z"
+              fill="#91D5C6" opacity=".7"/>
+
+        <path d="M-15 22 Q0 18 16 22"
+              stroke="#D8FFF3" stroke-width="2"
+              fill="none" opacity=".8"/>
+
+        <path d="M-14 -3 L-11 10"
+              stroke="#FFFFFF" stroke-width="3"
+              stroke-linecap="round" opacity=".8"/>
+      </g>
+
+      <!-- Small floating pill decoration -->
+      <g class="float-two" transform="translate(125 235) rotate(28)">
+        <rect width="18" height="34" rx="9" fill="#FFFFFF"
+              stroke="#D7E9E2" stroke-width="1"/>
+        <path d="M0 17 H18" stroke="#168779" stroke-width="2"/>
+        <path d="M0 9 A9 9 0 0 1 18 9 V17 H0Z" fill="#168779"/>
       </g>
 
     </svg>
 
-    <h1 id="title">A small habit.<br>A bigger consequence.</h1>
-
-    <p class="description" id="description">
-      We often take antibiotics without thinking twice.
-      But what happens when we use them when they aren't needed?
-    </p>
+    <h1 id="title"></h1>
+    <p class="description" id="description"></p>
 
   </main>
 
-  <div class="bottom">
-    <button id="nextButton" onclick="nextScene()">
+  <footer class="bottom">
+    <button id="nextButton" type="button" onclick="nextScene()">
       Start the story →
     </button>
-  </div>
+  </footer>
 
 </div>
 
 <script>
 
+/* ==========================================
+   LANGUAGE FOUNDATION
+   Add Gujarati and Hindi translations later.
+   All visible text is connected to a key.
+========================================== */
+
+const translations = {
+  en: {
+    brand: "ANTIBIOTIC RESISTANCE",
+
+    intro_title: "A small habit. A bigger consequence.",
+    intro_description:
+      "We often take antibiotics without thinking twice. But what happens when we use them when they aren't needed?",
+    intro_button: "Start the story →",
+
+    scene1_title: "Feeling a little unwell?",
+    scene1_description:
+      "A common cold, a sore throat or a minor problem. Sometimes we reach for leftover antibiotics without consulting a healthcare professional.",
+    scene1_button: "Let's look inside →",
+
+    scene2_title: "A microscopic world awaits.",
+    scene2_description:
+      "Let's follow the journey of an antibiotic and discover what can happen to bacteria when they are exposed to it.",
+    scene2_button: "Continue →"
+  }
+};
+
+let activeLanguage = "en";
+
+function translate(key) {
+  return translations[activeLanguage]?.[key]
+      || translations.en[key]
+      || key;
+}
+
+/*
+Later, language files can be loaded like this:
+
+async function setLanguage(language) {
+  try {
+    const response = await fetch(`languages/${language}.json`);
+    if (!response.ok) throw new Error("Translation unavailable");
+
+    translations[language] = await response.json();
+    activeLanguage = language;
+    renderScene();
+  } catch (error) {
+    console.error("Could not load language:", error);
+  }
+}
+
+The language selector can call setLanguage("gu")
+or setLanguage("hi") once those JSON files exist.
+*/
+
+/* ==========================================
+   STORY DATA
+========================================== */
+
 const scenes = [
   {
-    title: "A small habit.<br>A bigger consequence.",
-    description:
-      "We often take antibiotics without thinking twice. But what happens when we use them when they aren't needed?",
-    button: "Start the story →",
+    title: "intro_title",
+    description: "intro_description",
+    button: "intro_button",
     counter: "INTRO"
   },
   {
-    title: "Feeling a little unwell?",
-    description:
-      "A common cold, a sore throat or a minor problem. Sometimes we reach for leftover antibiotics without consulting a healthcare professional.",
-    button: "Let's look inside →",
+    title: "scene1_title",
+    description: "scene1_description",
+    button: "scene1_button",
     counter: "01 / 06"
   },
   {
-    title: "A microscopic world awaits.",
-    description:
-      "Let's follow the journey of an antibiotic and discover what can happen to bacteria when they are exposed to it.",
-    button: "Continue →",
+    title: "scene2_title",
+    description: "scene2_description",
+    button: "scene2_button",
     counter: "02 / 06"
   }
 ];
 
 let currentScene = 0;
 
-function nextScene() {
+/* ==========================================
+   RENDERING
+========================================== */
 
+function renderScene() {
+  const scene = scenes[currentScene];
+  const container = document.getElementById("scene");
+
+  // Replay the entrance animation
+  container.style.animation = "none";
+  void container.offsetWidth;
+  container.style.animation = "appear .7s ease both";
+
+  // Insert translated content
+  document.getElementById("title").textContent =
+    translate(scene.title);
+
+  document.getElementById("description").textContent =
+    translate(scene.description);
+
+  document.getElementById("nextButton").textContent =
+    translate(scene.button);
+
+  document.getElementById("counter").textContent =
+    scene.counter;
+
+  // Update progress
+  const progressValue =
+    currentScene / (scenes.length - 1) * 100;
+
+  document.getElementById("progress").style.width =
+    progressValue + "%";
+
+  document.getElementById("progressTrack")
+    .setAttribute("aria-valuenow", progressValue);
+}
+
+/* ==========================================
+   NEXT BUTTON
+========================================== */
+
+function nextScene() {
   if (currentScene >= scenes.length - 1) {
     return;
   }
 
   currentScene++;
-
-  const scene = scenes[currentScene];
-
-  const container = document.getElementById("scene");
-
-  container.style.animation = "none";
-  void container.offsetWidth;
-  container.style.animation = "appear 0.7s ease";
-
-  document.getElementById("title").innerHTML = scene.title;
-  document.getElementById("description").textContent =
-    scene.description;
-
-  document.getElementById("nextButton").textContent =
-    scene.button;
-
-  document.getElementById("counter").textContent =
-    scene.counter;
-
-  document.getElementById("progress").style.width =
-    (currentScene / (scenes.length - 1) * 100) + "%";
+  renderScene();
 }
+
+/* ==========================================
+   INITIALISE
+========================================== */
+
+renderScene();
 
 </script>
 
