@@ -1,0 +1,35 @@
+<svg viewBox="0 0 620 500" role="img" aria-label="Everyday symptoms connected by a repeated habit" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 7L7 0" stroke="#20201e" stroke-width=".7" opacity=".25"/></pattern></defs>
+    
+<g class="enter-left">
+ <path class="thin" d="M175 414 Q300 435 448 414"/>
+ <path class="shade" d="M250 292 Q241 348 247 413 L286 413 L300 327 L312 413 L351 413 Q358 349 344 292Z"/>
+ <path class="ink" d="M250 292 Q241 348 247 413 L286 413 L300 327 L312 413 L351 413 Q358 349 344 292Z"/>
+ <path class="shade" d="M250 190 Q226 204 219 267 L211 325 Q230 337 251 331 L263 270 L270 214Z"/>
+ <path class="ink" d="M250 190 Q226 204 219 267 L211 325 Q230 337 251 331 L263 270 L270 214Z"/>
+ <path class="shade" d="M346 190 Q370 204 377 267 L385 325 Q366 337 345 331 L333 270 L326 214Z"/>
+ <path class="ink" d="M346 190 Q370 204 377 267 L385 325 Q366 337 345 331 L333 270 L326 214Z"/>
+ <path class="shade" d="M249 190 Q300 169 349 190 L365 296 Q306 326 234 296Z"/>
+ <path class="ink" d="M249 190 Q300 169 349 190 L365 296 Q306 326 234 296Z"/>
+ <path class="thin" d="M249 205Q267 217 283 211M348 205Q333 218 318 211"/>
+ <path d="M265 100 Q267 55 310 53 Q355 55 359 105 L351 174 Q344 209 310 211 Q275 207 265 174Z" fill="#fffefa" stroke="#20201e" stroke-width="3"/>
+ <path d="M265 111 Q251 64 292 43 Q336 24 363 63 Q378 90 357 147 L350 117 Q340 101 331 92 Q307 119 267 109Z" fill="#20201e"/>
+ <path class="ink" d="M265 111 Q251 64 292 43 Q336 24 363 63 Q378 90 357 147"/>
+ <path d="M267 116 Q250 155 270 187 Q278 201 291 207 L280 174 Q270 154 278 127Z" fill="#20201e"/>
+ <path d="M354 112 Q372 155 350 190 L338 204 Q356 166 343 132Z" fill="#20201e"/>
+ <path class="ink" d="M290 123q8 -7 16 0M322 123q8 -7 16 0"/>
+ <ellipse cx="300" cy="135" rx="3.4" ry="5" fill="#20201e"/><ellipse cx="331" cy="135" rx="3.4" ry="5" fill="#20201e"/>
+ <path class="thin" d="M315 139l-3 14 7 2M302 171q13 8 26 -1"/>
+ <path class="thin" d="M278 155q-8 12 0 23M348 155q8 12 0 23"/>
+ <path class="thin" d="M250 219q-10 29 -7 54M351 218q10 29 7 54"/>
+ <path class="thin" d="M266 305l-8 97M338 305l8 97"/>
+</g>
+ <g class="enter-left">
+  <circle class="red-fill" cx="103" cy="113" r="40"/><path class="red" d="M103 91v44M81 113h44"/><text class="label" x="58" y="170">HEADACHE</text>
+  <circle class="shade" cx="510" cy="119" r="43"/><path class="ink" d="M486 119q24 -27 48 0q-24 27 -48 0Z"/><text class="label" x="470" y="179">SORE THROAT</text>
+  <circle class="shade" cx="105" cy="340" r="39"/><path class="ink" d="M84 340q21 -24 42 0q-21 24 -42 0Z"/><text class="label" x="74" y="397">FEELING OFF</text>
+ </g>
+ <g class="enter-right"><path class="red" d="M425 326q-18 -10 -28 6q-9 16 8 26l43 22q17 8 27 -8q9 -17 -8 -26Z"/><path class="thin" d="M430 325l-18 34"/></g>
+ <path class="thin draw" d="M145 115q55 -42 94 15M463 135q-50 -28 -91 0M145 337q56 24 93 -25"/>
+ 
+    </svg>

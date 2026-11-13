@@ -1,0 +1,16 @@
+<svg viewBox="0 0 620 500" role="img" aria-label="Antibiotic molecules approaching bacterial cells" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 7L7 0" stroke="#20201e" stroke-width=".7" opacity=".25"/></pattern></defs>
+    
+ <g class="enter-left">
+  <g transform="translate(92 118) rotate(-25)"><rect class="red-fill" x="0" y="0" width="130" height="46" rx="23"/><path class="red" d="M65 2v42"/><path class="thin" d="M12 11q15 -12 35 -3"/></g>
+  <path class="red draw" d="M223 148Q270 155 308 194"/>
+  <path class="red" d="M295 184l16 12 -20 5"/>
+ </g>
+ <g class="enter-right">
+  <g transform="translate(370 170)"><rect class="shade" x="0" y="0" width="150" height="68" rx="34"/><path class="ink" d="M20 34q35 -35 70 0q35 35 60 0"/><circle class="red-fill" cx="77" cy="34" r="11"/></g>
+  <g transform="translate(355 310)"><rect class="shade" x="0" y="0" width="150" height="68" rx="34"/><path class="ink" d="M20 34q35 -35 70 0q35 35 60 0"/></g>
+ </g>
+ <g class="float"><circle class="shade" cx="145" cy="323" r="34"/><path class="ink" d="M124 323q21 -25 42 0q-21 25 -42 0Z"/></g>
+ <path class="thin" d="M260 260l28 -17m-28 17l28 17"/><text class="label" x="92" y="415">ANTIBIOTIC EXPOSURE</text>
+ 
+    </svg>

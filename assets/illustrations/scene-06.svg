@@ -1,0 +1,21 @@
+<svg viewBox="0 0 620 500" role="img" aria-label="Normal and modified antibiotic targets compared side by side" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 7L7 0" stroke="#20201e" stroke-width=".7" opacity=".25"/></pattern></defs>
+    
+ <g class="enter-left">
+  <text class="label" x="75" y="104">NORMAL TARGET</text>
+  <circle class="shade" cx="180" cy="235" r="90"/><path class="ink" d="M125 220q55 -65 110 0v35q-55 65 -110 0Z"/>
+  <path class="red-fill" d="M162 105l18 -25 18 25v38h-36Z"/><path class="red" d="M180 145v38"/>
+  <path class="thin" d="M180 184v-15"/>
+  <text class="hand" x="105" y="365">fits the target</text>
+ </g>
+ <g class="enter-right">
+  <text class="label" x="365" y="104">ALTERED TARGET</text>
+  <circle class="shade" cx="450" cy="235" r="90"/><path class="ink" d="M395 220q35 -65 65 -25l20 15v35q-55 65 -85 0Z"/>
+  <path class="red-fill" d="M432 105l18 -25 18 25v25l-18 12 -18 -12Z"/>
+  <path class="red" d="M450 145l-20 30 20 13"/>
+  <path class="red" d="M485 170l25 -20m-17 42l30 -3"/>
+  <text class="hand" x="385" y="365">poor binding</text>
+ </g>
+ <path class="thin draw" d="M276 235h65m-14 -13l14 13 -14 13"/>
+ 
+    </svg>
