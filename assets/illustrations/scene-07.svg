@@ -1,0 +1,16 @@
+<svg viewBox="0 0 620 500" role="img" aria-label="Resistant bacteria multiplying after selection" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 7L7 0" stroke="#20201e" stroke-width=".7" opacity=".25"/></pattern></defs>
+    
+ <g class="enter-left">
+  <g transform="translate(65 180)"><rect class="red-fill" width="150" height="65" rx="32"/><path class="red" d="M22 32q25 -25 50 0q25 25 50 0"/></g>
+  <path class="red draw" d="M220 210q52 -35 92 0m-18 -15l18 15 -20 12"/>
+ </g>
+ <g class="enter-right">
+  <g class="pulse"><rect class="red-fill" x="345" y="105" width="125" height="56" rx="28"/><path class="red" d="M365 133q20 -20 40 0q20 20 40 0"/></g>
+  <g class="pulse"><rect class="red-fill" x="420" y="220" width="125" height="56" rx="28"/><path class="red" d="M440 248q20 -20 40 0q20 20 40 0"/></g>
+  <g class="pulse"><rect class="red-fill" x="325" y="335" width="125" height="56" rx="28"/><path class="red" d="M345 363q20 -20 40 0q20 20 40 0"/></g>
+  <path class="thin draw" d="M405 166l43 47m-26 65l-35 37"/>
+  <text class="label" x="350" y="440">MORE RESISTANT BACTERIA</text>
+ </g>
+ 
+    </svg>
